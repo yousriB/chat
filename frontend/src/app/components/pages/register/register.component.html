@@ -1,0 +1,151 @@
+<div class="h-screen flex items-center justify-center bg-gray-100">
+  <div
+    class="w-full max-w-4xl bg-white rounded-lg shadow-lg flex overflow-hidden"
+  >
+    <!-- Left Side -->
+    <div class="md:w-1/2 w-full bg-white p-8 flex flex-col justify-center">
+      <form
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm"
+        novalidate
+      >
+        <div class="text-center mb-8">
+          <h2 class="text-[#3EB399] text-2xl font-bold">
+            Patient Interface Register
+          </h2>
+        </div>
+        <div>
+          <div class="mb-4">
+            <label class="block text-gray-400 mb-2" for="username"
+              >User name</label
+            >
+            <input
+              type="text"
+              id="username"
+              class="w-full px-3 py-2 bg-gray-100 text-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-[#3EB399]"
+              name="username"
+              autocomplete="username"
+              [(ngModel)]="form.username"
+              required
+              minlength="3"
+              maxlength="20"
+              #username="ngModel"
+            />
+            <div
+              style="color: red"
+              class="alert-danger"
+              *ngIf="username.errors && f.submitted"
+            >
+              <div *ngIf="username.errors?.required">Username is required</div>
+              <div *ngIf="username.errors?.minlength">
+                Username must be at least 3 characters
+              </div>
+              <div *ngIf="username.errors?.maxlength">
+                Username must be at most 20 characters
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-gray-400 mb-2" for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              class="w-full px-3 py-2 bg-gray-100 text-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-[#3EB399]"
+              name="email"
+              autocomplete="email"
+              [(ngModel)]="form.email"
+              required
+              #email="ngModel"
+            />
+            <div
+              style="color: red"
+              class="alert-danger"
+              *ngIf="email.errors && f.submitted"
+            >
+              <div *ngIf="email.errors?.required">Email is required</div>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-gray-400 mb-2" for="password"
+              >Password</label
+            >
+            <input
+              type="password"
+              id="password"
+              class="w-full px-3 py-2 bg-gray-100 text-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-[#3EB399]"
+              name="password"
+              autocomplete="current-password"
+              [(ngModel)]="form.password"
+              required
+              minlength="6"
+              #password="ngModel"
+            />
+            <div
+              style="color: red"
+              class="alert-danger"
+              role="alert"
+              *ngIf="password.errors && f.submitted"
+            >
+              <div *ngIf="password.errors?.required">Password is required</div>
+              <div *ngIf="password.errors?.minlength">
+                Password must be at least 6 characters
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-gray-400 mb-2" for="passwordConfirmation"
+              >Confirmation Password</label
+            >
+            <input
+              type="password"
+              id="passwordConfirmation"
+              class="w-full px-3 py-2 bg-gray-100 text-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-[#3EB399]"
+              name="passwordConfirmation"
+              [(ngModel)]="form.passwordtest"
+            />
+          </div>
+
+          <button
+            type="submit"
+            class="w-full py-2 bg-gradient-to-r from-[#C1F991] to-[#3EB399] text-white font-bold rounded"
+          >
+            REGISTER
+          </button>
+          <div *ngIf="emailxists">
+            <p style="color: red">Email already exists</p>
+          </div>
+
+          <div class="text-center mt-4">
+            <p class="text-gray-500">
+              Already have an account?
+              <a
+                href="auth/patient/login"
+                class="text-[#3EB399] font-bold cursor-pointer"
+                >Login</a
+              >
+            </p>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Right Side -->
+    <div
+      class="hidden md:flex md:w-1/2 gradient-bg p-8 flex-col justify-center bg-gradient-to-r from-[#C1F991] to-[#3EB399]"
+    >
+      <h2 class="text-white text-3xl font-bold mb-4">
+        Join us and make a difference
+      </h2>
+      <p class="text-white">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat.
+      </p>
+    </div>
+  </div>
+</div>

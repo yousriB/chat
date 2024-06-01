@@ -1,0 +1,101 @@
+<div class="h-screen flex items-center justify-center bg-gray-100">
+  <div
+    class="w-full max-w-4xl bg-white rounded-lg shadow-lg flex overflow-hidden"
+  >
+    <!-- Left Side -->
+    <div class="sm:w-1/2 w-full bg-white p-8 flex flex-col justify-center">
+      <div class="text-center mb-8">
+        <img
+          src="../../../../assets/logo.png"
+          alt="Logo"
+          class="mx-auto mb-4"
+        />
+        <h2 class="text-[#3EB399] text-2xl font-bold">
+          Patient Interface Login
+        </h2>
+      </div>
+      <form
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm"
+        novalidate
+      >
+        <div class="mb-4">
+          <label class="block text-gray-400 mb-2" for="email">Email</label>
+          <input
+            autocomplete="email"
+            [(ngModel)]="form.email"
+            name="email"
+            required
+            #email="ngModel"
+            type="email"
+            id="email"
+            class="w-full px-3 py-2 bg-gray-100 text-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-[#3EB399]"
+          />
+          <div style="color: red" *ngIf="email.errors && f.submitted">
+            <div *ngIf="email.errors?.required">Email is required</div>
+            <div *ngIf="email.errors?.email">Invalid email address</div>
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-400 mb-2" for="password"
+            >Password</label
+          >
+          <input
+            autocomplete="current-password"
+            [(ngModel)]="form.password"
+            name="password"
+            required
+            minlength="6"
+            #password="ngModel"
+            type="password"
+            id="password"
+            class="w-full px-3 py-2 bg-gray-100 text-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-[#3EB399]"
+          />
+          <div style="color: red" *ngIf="password.errors && f.submitted">
+            <div *ngIf="password.errors?.required">Password is required</div>
+            <div *ngIf="password.errors?.minlength">
+              Password must be at least 6 characters
+            </div>
+          </div>
+        </div>
+        <div style="color: red" *ngIf="errorMessage">{{ errorMessage }}</div>
+        <button
+          type="submit"
+          class="w-full py-2 bg-gradient-to-r from-[#C1F991] to-[#3EB399] text-white font-bold rounded"
+        >
+          LOG IN
+        </button>
+        <div class="text-center mt-4">
+          <a href="#" class="text-gray-500 hover:text-gray-800"
+            >Forgot password?</a
+          >
+        </div>
+        <div class="text-center mt-4">
+          <p class="text-gray-500">
+            Don't have an account?
+            <a
+              href="auth/patient/registre"
+              class="text-[#3EB399] font-bold cursor-pointer"
+              >Register</a
+            >
+          </p>
+        </div>
+      </form>
+    </div>
+    <!-- Right Side -->
+    <div
+      class="hidden w-1/2 gradient-bg p-8 sm:flex flex-col justify-center bg-gradient-to-r from-[#C1F991] to-[#3EB399]"
+    >
+      <h2 class="text-white text-3xl font-bold mb-4">
+        We are more than just a company
+      </h2>
+      <p class="text-white">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat.
+      </p>
+    </div>
+  </div>
+</div>
