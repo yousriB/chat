@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenStorageService } from 'src/app/services/tokenstorage.service';
+import { TranslationService } from 'src/app/services/translation.service';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-chatpatient',
@@ -33,12 +36,16 @@ export class ChatpatientComponent implements OnInit {
   messagesbyidpatientMedecin: any;
   idmedecin: any;
   selectedMedecinName: string = '';
+  title = 'translate-app';
+  translatedText: string = '';
+  translate: any;
 
   constructor(
+    private http: HttpClient,
     private route: ActivatedRoute,
     private authService: AuthService,
     private tokenStorage: TokenStorageService,
-    private router: Router
+    private router: Router,private translationService: TranslationService
   ) { }
 
   ngOnInit(): void {
@@ -74,6 +81,8 @@ export class ChatpatientComponent implements OnInit {
       }
     }
   }
+
+
 
   add_message(): void {
     const formData = new FormData();

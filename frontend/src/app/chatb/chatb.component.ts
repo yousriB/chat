@@ -6,19 +6,29 @@ import { AuthService } from 'src/app/services/auth.service';
 import { TokenStorageService } from 'src/app/services/tokenstorage.service';
 
 @Component({
-  selector: 'app-chatmedecin',
+  selector: 'app-chatb',
   standalone: true,
   imports: [
     FormsModule,
     CommonModule
   ],
-  templateUrl: './chatmedecin.component.html',
-  styleUrl: './chatmedecin.component.css'
+  templateUrl: './chatb.component.html',
+  styleUrl: './chatb.component.css'
 })
-export class ChatmedecinComponent implements OnInit {
+export class ChatbComponent implements OnInit {
 
   form: any = {
-    reponse_text:null
+    // username: null,
+    password: null,
+    username: null,
+    prenom: null,
+    email: null,
+    numero: null,
+    passwordtest:null,
+
+    message:null,
+     input_language:null,
+      output_language:null
   };
 
   isLoggedIn = false;
@@ -38,6 +48,7 @@ export class ChatmedecinComponent implements OnInit {
   messagesbyidpatientMedecin: any[] = [];
   messagesbyidpatientDoctor: any[] = [];
   selectedMedecinName: any;
+  rep: any;
 
   constructor(private route: ActivatedRoute, private authService: AuthService,
     private tokenStorage: TokenStorageService, private router: Router) { }
@@ -58,11 +69,8 @@ export class ChatmedecinComponent implements OnInit {
               const filteredMessages = [];
         
               for (const message of this.messagesbyidpatient) {
-                // Check if we have already encountered a message from this doctor
                 if (!uniqueDoctorIds.has(message.medecin.id)) {
-                  // Add this doctor's ID to the set to mark it as encountered
                   uniqueDoctorIds.add(message.medecin.id);
-                  // Add this message to the filtered list
                   filteredMessages.push(message);
                 }
               }
@@ -79,23 +87,27 @@ export class ChatmedecinComponent implements OnInit {
           }
         );
         if (this.tokenStorage.getUser() && this.rolePatient) {
-          this.router.navigate(['medecin/chat']);
+          // this.router.navigate(['medecin/chat']);
+          this.router.navigate(['']);
         }
       }
     }
-    add_message():void{
-      const formData= new FormData();
-      formData.append('patient',this.idpatient)
-      formData.append('medecin',this.user.id)
-      formData.append('reponse_text',this.form.reponse_text)
-      formData.append('question',this.questionlast.id)
-      
-      this.authService.add_response_medecin(formData).subscribe(data=>{
-        console.log(data)
-       
-        this.messagesMedecin(this.idpatient,this.selectedMedecinName)
-      })
+    add_message(): void {
+      const formData = new FormData();
+      formData.append('message', this.form.message);
+      formData.append('input_language', this.form.input_language);
+      formData.append('output_language', this.form.output_language);
+  
+      this.authService.postchat(formData).subscribe(data => {
+        console.log(data);
+        this.rep=data;
+        console.log(this.rep)
+      });
     }
+
+
+
+
     logout(): void {
       this.tokenStorage.signOut();
       this.router.navigate(['auth/medecin/login']);
@@ -103,7 +115,7 @@ export class ChatmedecinComponent implements OnInit {
     messagesMedecin(id: any,username: string) {
       this.selectedMedecinName = username; 
       this.idpatient = id;
-      this.router.navigate([`/medecin/chat/${id}`]);
+      this.router.navigate([`/chat/${id}`]);
     
       // Get messages by patient and doctor
       this.authService.getmessagebyidpatientandmedecin(id, this.user.id).subscribe(
@@ -149,3 +161,4 @@ export class ChatmedecinComponent implements OnInit {
     
 
 }
+

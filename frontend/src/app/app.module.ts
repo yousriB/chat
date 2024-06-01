@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatLabel } from '@angular/material/form-field';
+import { TranslationService } from './services/translation.service';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,7 @@ import { MatLabel } from '@angular/material/form-field';
     
     
   ],
-  providers: [],
+  providers: [TranslationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

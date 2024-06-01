@@ -8,9 +8,11 @@ import { ChatpatientComponent } from './components/pages/chatpatient/chatpatient
 import { ChatmedecinComponent } from './components/pages/chatmedecin/chatmedecin.component';
 import { RegistermedecinComponent } from './components/pages/registermedecin/registermedecin.component';
 import { LoginmedecinComponent } from './components/pages/loginmedecin/loginmedecin.component';
+import { ChatbComponent } from './chatb/chatb.component';
+import { HomeChatComponent } from './home-chat/home-chat.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'medecin/chat', pathMatch: 'full' },
+  { path: '', redirectTo: 'devTech', pathMatch: 'full' },
   { path: 'adminhome', component: AdminhomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'home/:id', component: HomeComponent },
@@ -22,6 +24,10 @@ const routes: Routes = [
   { path: 'patient/chat/:id', component: ChatpatientComponent },
   { path: 'medecin/chat/:id', component: ChatmedecinComponent },
   { path: 'medecin/chat', component: ChatmedecinComponent },
+
+  { path: 'chat', component: ChatbComponent },
+  { path: 'chat/:id', component: ChatbComponent },
+  { path: 'devTech', component: HomeChatComponent },
 ];
 
 @NgModule({

@@ -13,6 +13,48 @@
           + New Chat
         </button>
       </div>
+      <br/>
+      <div class="flex items-center p-3 bg-gray-50 rounded-md shadow">
+        <div class="bg-gray-400 h-10 w-10 rounded-full mr-2">
+          <img
+          src="../../../../assets/logo.png"
+          alt=""
+          class="w-10 h-10 rounded-full"
+        />
+        </div>
+        <div class="font-semibold">
+          Assistant IA<br/>
+          Assistant.com
+        </div>
+      </div>
+
+    
+      <br/>
+      <div class="flex items-center p-3 bg-gray-50 rounded-md shadow">
+        <div class="bg-gray-400 h-10 w-10 rounded-full mr-2"></div>
+        <div class="font-semibold">
+          Medecin 1<br/>
+          medecin1.com
+        </div>
+      </div>
+
+      <br/>
+      <div class="flex items-center p-3 bg-gray-50 rounded-md shadow">
+        <div class="bg-gray-400 h-10 w-10 rounded-full mr-2"></div>
+        <div class="font-semibold">
+          Medecin 2<br/>
+          medecin2.com
+        </div>
+      </div>
+
+      <br/>
+      <div class="flex items-center p-3 bg-gray-50 rounded-md shadow">
+        <div class="bg-gray-400 h-10 w-10 rounded-full mr-2"></div>
+        <div class="font-semibold">
+          Medecin 3<br/>
+          medecin3.com
+        </div>
+      </div>
 
       <!-- Chat List -->
       <div class="flex-1 overflow-y-auto">
@@ -72,41 +114,26 @@
 
       <!-- Messages Area -->
       <div class="flex-1 overflow-y-auto p-4 bg-white">
-        <div *ngFor="let medmessage of messagesbyidpatientMedecin">
+        <div >
           <div class="mb-4 flex justify-start">
             <div
               class="bg-white text-gray-700 p-2 rounded-lg shadow-md max-w-[600px]"
             >
               <!-- {{ medmessage.question.question_text }} -->
-              <p>{{ medmessage.question_text }}</p>
+              <!-- <p>{{ rep.response }}</p>
+              <p>{{ rep.is_chatbot }}</p> -->
+         
             </div>
           </div>
 
           <div class="mb-4 flex justify-end">
             <div
-              *ngIf="medmessage.responses && medmessage.responses.length > 0"
               class="bg-[#4BB998] text-white p-2 rounded-lg shadow-md max-w-[600px]"
             >
-              <p *ngFor="let response of medmessage.responses">
-                {{ response.reponse_text }}
-              </p>
+            <p>{{ rep.reponse }}</p>
+            <!-- <p>{{ rep.is_chatbot }}</p> -->
             </div>
-            <ng-container
-              *ngIf="!medmessage.responses || medmessage.responses.length === 0"
-            >
-              <p
-                class="bg-[#d51616] text-white p-2 rounded-lg shadow-md max-w-[600px]"
-              >
-                <!-- No responses yet. -->
-              </p>
-            </ng-container>
-            <ng-container
-              *ngFor="let response of medmessage.responses; let last = last"
-            >
-              <ng-container *ngIf="!last">
-                <p>{{ response.reponse_text }}</p>
-              </ng-container>
-            </ng-container>
+
             <!-- <div
               *ngIf="!medmessage.responses || medmessage.responses.length === 0"
             >
@@ -126,16 +153,30 @@
           #f="ngForm"
           novalidate
         >
+          <label> input_language </label>
+          <select [(ngModel)]="form.input_language" name="input_language">
+            <option value="french">Fr</option>
+            <option value="arabe">Ar</option>
+            <option value="english">AN</option>
+          </select>
+          <label> output_language </label>
+          <select [(ngModel)]="form.output_language" name="output_language">
+            <option value="french">Fr</option>
+            <option value="arabe">Ar</option>
+            <option value="english">AN</option>
+          </select>
+          <br />
           <input
             type="text"
             placeholder="Type a message"
-            class="p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3EB399] outline-none w-5/6"
-            autocomplete="reponse_text"
-            [(ngModel)]="form.reponse_text"
-            name="reponse_text"
+            class="p-2 border border-gray -300 rounded-lg focus:ring-2 focus:ring-[#3EB399] outline-none w-5/6"
+            autocomplete="message"
+            [(ngModel)]="form.message"
+            name="message"
             required
-            #reponse_text="ngModel"
+            #message="ngModel"
           />
+
           <button
             class="w-auto ml-2 p-2 bg-[#4BB998] focus:bg-[#40a083] transition-all duration-100 text-white rounded-lg"
           >
